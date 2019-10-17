@@ -8,10 +8,28 @@ module.exports = {
 	},
 
 	requestReceived: function(req, res, next) {
-		this.cache.get(req.prerender.url, function (err, result) {
-			if (!err && result) {
-				req.prerender.cacheHit = true;
-				res.send(200, result);
+		const cache = this.cache;
+		cache.get(req.prerender.url, function (err, result) {	
+			const submitType = req.prerender.submitType;
+			
+			if(!err && result) {
+				console.log("Cache Found!!");
+				if(submitType === "delete") {
+					req.prerender.cacheHit = true;
+					cache.del(req.prerender.url, function (err) {
+						console.log("Cached is deleted!");
+						res.send(200, "Deleted Successfully");
+					});
+				} else if(submitType === "create" || submitType === "edit") {
+					next();
+				} else {
+					req.prerender.cacheHit = true;
+					console.log("Cache gets returned!");
+					res.send(200, result);
+				}
+			} else if(!result && submitType === "delete") {
+				console.log('Cached is "ALREADY" deleted!');
+				res.send(404);
 			} else {
 				next();
 			}
@@ -19,8 +37,11 @@ module.exports = {
 	},
 
 	beforeSend: function(req, res, next) {
+		const submitType = req.prerender.submitType;
+		
 		if (!req.prerender.cacheHit && req.prerender.statusCode == 200) {
 			this.cache.set(req.prerender.url, req.prerender.content);
+			console.log("Cache is created!");
 		}
 		next();
 	}
