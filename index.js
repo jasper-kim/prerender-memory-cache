@@ -3,7 +3,7 @@ var cacheManager = require('cache-manager');
 module.exports = {
 	init: function() {
 		this.cache = cacheManager.caching({
-			store: 'memory', max: process.env.CACHE_MAXSIZE || 100, ttl: process.env.CACHE_TTL || 60/*seconds*/
+			store: 'memory', max: process.env.CACHE_MAXSIZE || 1000, ttl: process.env.CACHE_TTL || 7776000/*90 days in seconds*/
 		});
 	},
 
