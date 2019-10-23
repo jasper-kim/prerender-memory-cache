@@ -1,11 +1,22 @@
 {
-  "name": "prerender-memory-cache",
-  "version": "1.0.2",
+  "name": "prerender-memory-cache-api",
+  "version": "1.0.0",
   "description": "In memory cache for use with Prerender server",
   "main": "index.js",
-  "author": "Todd Hooper",
+  "author": "Jasper Kim (modifier)",
   "license": "MIT",
   "dependencies": {
     "cache-manager": "^2.6.0"
-  }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasper-kim/prerender-memory-cache.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jasper-kim/prerender-memory-cache/issues"
+  },
+  "homepage": "https://github.com/jasper-kim/prerender-memory-cache#readme"
 }

@@ -1,3 +1,14 @@
+Status
+===========================
+
+This is a modification of Prerender In-Memory Cache. It is a fork of https://github.com/matthesrieke/prerender-filesystem-cache, adding additional if conditions to manipulate caches depending on which endpoints are hitted.
+
+## Use Cases
+- If /api/create or /api/edit are hittied, create a new cache of the given URL.
+- If /api/delete is hitted, delete the exsting cache of the given URL.
+- If different URL with the above is hitted and find a cache of the given URL, return a cache.
+- If different URL with the above is hitted and DOES NOT find a cache of the given URL, create a new cache of the given URL.
+
 Prerender In-Memory Cache plugin
 ===========================
 
