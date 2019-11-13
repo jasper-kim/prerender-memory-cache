@@ -12,6 +12,12 @@ module.exports = {
 		cache.get(req.prerender.url, function (err, result) {	
 			const submitType = req.prerender.submitType;
 			
+			if(submitType === "reset") {
+				cache.reset();
+				console.log("Flushing cache!");
+				res.send(200, "Deleted Successfully");
+			}
+
 			if(!err && result) {
 				console.log("Cache Found!!");
 				if(submitType === "delete") {
